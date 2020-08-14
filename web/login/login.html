@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width">
+
+        <title>登录</title>
+
+        <link href="res/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="res/css/idstyle.css" />
+        <script src="res/js/jquery.min.js"></script>
+
+        <style type="text/css">
+            body{
+                background-image:url("res/img/wjc_loginbg.jpg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+        </style>
+        <!--第一次写，写代码习惯不好，没有浏览器适配没有强迫症居中而且div乱用...顺便IE滚粗!! by Sylpha-->
+        <!--(c) 12,17,20 Sylpha Project Co., Ltd.-->
+    </head>
+    
+    <body>
+        <div>
+            <!---
+            <div class="loginpagebg" style="width:120px;height:20px;margin-top: -20px;float: right;">
+                <p align="center">简体中文 <a href="./login_en.html">English</a></p>
+            </div>
+            -->
+
+            <div class="mainpage loginpagebg logintop" id="loginpage">
+            <!--style="box-shadow: 5px 5px 10px #888888;"-->
+
+                <div class="form-group">
+                    
+                    <p>&nbsp;</p>
+                    <p style=""><h3>登 录</h3></p>
+                    
+                    <hr />
+                    <!--<div class="panel panel-default" style="width:365px;text-align:center;margin:0 auto;">-->
+                    <div class="" style="width:365px;text-align:center;margin:0 auto;">    
+                        <div class="">
+                            <!--<form method="post" action="doLogin" id="loginform" autocomplete="off"> -->
+
+                                <p><label>用户名</label></p>
+                                    <p><input class="form-control" type="text" minlength="4" maxlength="25" name="username" id="username" placeholder="请输入用户名..." required="required" style=""></p>
+                                
+                                <p>&nbsp;</p>
+
+                                <p><label>密码</label></p>
+                                    <p><input class="form-control" minlength="6" maxlength="25" type="password" name="password" id="password" placeholder="请输入密码..." pattern=".+" required="required" style=""></p>
+                                    <!-- <p class="des"><a href="findpassword.html">忘记密码？</a></p> -->
+                                
+                                <p>&nbsp;</p>
+
+                                <p><button type="submit" class="btn btn-success" id="loginbtn">登 录</button></p>
+                                <p style="color: red;display: none" id="error-msg"></p>
+                            <!--</form>-->
+
+                        </div>
+                    </div>
+                </div>
+                            
+                <p>&nbsp;</p>
+
+                <div class="toReg" id="toReg">
+                    <p><h5>还未拥有账号？</h5></p>
+                    <p><a href="javascript:toReg()">注册</a></p>
+                </div>
+                
+                <hr />
+                <p>&copy; Team 220N.</p>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+    </body>
+    <script>
+        $(document).ready(function() {
+            $("#loginbtn").click(function() {
+                $("#error-msg").hide();
+                $("#error-msg").empty();
+                $("#loginbtn").attr("disabled",true);
+                var username = $("input#username").val();
+                var password = $("input#password").val();
+
+                $.ajax({
+                    type:"post",
+                    url:"doLogin?t="+ Math.random(),
+                    dataType:"json",
+                    data:"username=" + username + "&password=" + password,
+                    success:function (json) {
+                        if(json.errCode == 0) {
+                            checkLogin();
+                        } else {
+                            $("#error-msg").append(json.errCode + " 登录失败：" + json.errMsg);
+                            $("#error-msg").show();
+                            $("#loginbtn").attr("disabled",false);
+                        }
+                    }
+                });
+            });
+
+        });
+
+        function checkLogin() {
+            $.ajax({
+                type:"GET",
+                url:"checkLogin?t=" + Math.random(),
+                dataType: "json",
+                success:function(json) {
+                    if(json.userType == 1 || json.userType == 2) {
+                        window.location = "../console/noticeList.jsp";
+                    } else {
+                        $("#error-msg").append("获取用户类型失败");
+                        $("#error-msg").show();
+                        $("#loginbtn").attr("disabled",false);
+                    }
+                }
+            });
+        }
+
+        function toReg() {
+            alert("暂未开放，请联系值班教师开启账号");
+        }
+    </script>
+</html>

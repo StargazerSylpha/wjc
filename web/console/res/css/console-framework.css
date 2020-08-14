@@ -1,0 +1,112 @@
+.main-container-css {
+    margin:auto 150px auto 150px;
+    padding:0px;
+}
+.main-container-mobile-css {
+    padding: 0px;
+    margin: auto auto auto auto;
+}
+body {
+    background-color: #e6edf1;
+}
+
+/*顶部css*/
+.top-nav-container-css {
+    background-color:white;
+    filter: alpha(Opacity=75);
+    -moz-opacity:0.75;
+    opacity: 0.75;
+    height: 110px;
+}
+.top-nav-sub-css {
+    margin-top:15px;
+
+    
+}
+.top-nav-status-css {
+    margin-left:50px;
+    height:20px;
+    text-align: center;
+}
+.top-nav-func-css {
+    height:50px;
+    margin-left:50px;
+    text-align:center;
+}
+.top-nav-func-title-css {
+    margin-top:-5px; /* -3px*/
+}
+.top-nav-func-title-css:hover {
+    
+
+    background-color:#d8d8d8;
+}
+
+/*中部css*/
+
+.content-container-css {
+    /*
+    background-color:white;
+    filter: alpha(Opacity=75);
+    -moz-opacity:0.75;
+    opacity: 0.75;
+    padding:15px;
+    */
+    margin-top:15px;
+    
+}
+.content-func-select-css {
+    
+    background-color:white;
+    filter: alpha(Opacity=75);
+    -moz-opacity:0.75;
+    opacity: 0.75;
+    text-align: center;
+}
+.content-func-select-area-css {
+    padding: 15px;
+}
+
+.content-func-select-title-css:hover {
+    background-color:#d8d8d8;
+}
+
+.content-func-select-cat {
+    margin-top:50px;
+    color: #919191;
+}
+
+.content-func-select-cat-notop {
+    color: #919191;
+}
+
+.content-main-area-css {
+
+    background-color:white;
+    filter: alpha(Opacity=75);
+    -moz-opacity:0.75;
+    opacity: 0.75;
+    
+}
+
+.content-area-css {
+    
+    padding:15px;
+}
+
+.notice-desc {
+    font-size: 13px;
+    color: #919191;
+}
+
+/*底部css*/
+.foot-container-css {
+    margin-top:15px;
+    padding: 15px;
+    background-color:white;
+    filter: alpha(Opacity=75);
+    -moz-opacity:0.75;
+    opacity: 0.75;
+    height: 50px;
+    text-align: center;
+}

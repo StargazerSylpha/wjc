@@ -1,0 +1,119 @@
+<head>
+
+    <meta charset="utf-8">
+    <title>控制台 - WJC</title>
+
+    <link rel="stylesheet" type="text/css" href="res/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="res/css/console-framework.css?ver=20200620" />
+    <script src="res/js/jquery.min.js"></script>
+    <!--<script src="res/js/bootstrap.min.js"></script>-->
+    <script>
+
+        //定义用户类型，界面加载完成就开始检测用户是否登录
+        var userType;
+        //宽度自适应（主要用于移动端）
+        $(document).ready(function(){
+            window.onresize = function () {
+                if(document.body.clientWidth > 1300) {
+                    $("#top-width-warning").hide();
+                    $("#main-container").removeClass("main-container-mobile-css").addClass("main-container-css");
+                }
+                if(document.body.clientWidth > 1000 && document.body.clientWidth < 1300 ) {
+                    $("#top-width-warning").hide();
+                    $("#main-container").removeClass("main-container-css").addClass("main-container-mobile-css");
+                }
+                if(document.body.clientWidth < 1000) {
+                    $("#top-width-warning").show();
+                }
+            }
+            checkLogin();
+        });
+
+        //页面通用 检测登录js主体
+        function checkLogin() {
+            $.ajax({
+                type:"GET",
+                url:"../login/checkLogin?t=" + Math.random(),
+                dataType: "json",
+                success:function(json) {
+                    if(json.userType == 1) {
+                        $("div#user-status").append(json.userId );
+                        $("div#user-type").append("（教师）");
+                        userType = 1;
+                        dofunc();
+                    } else if (json.userType == 2) {
+                        $("div#user-status").append(json.userId );
+                        $("div#user-type").append("（学生）");
+                        userType = 2;
+                        dofunc();
+                    } else {
+                        window.location = "../login/login.html";
+                    }
+                }
+            });
+        }
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="HandheldFriendly" content="true">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!--
+        Create:20200607 05:16
+        Design:zl
+        (c) sp-inc
+    -->
+
+</head>
+<body>
+<!--页面总容器-->
+<div id="main-container" class="main-container-css">
+
+
+    <!--顶部导航容器-->
+    <div id="top-nav-container" class="row top-nav-container-css">
+        <!--顶部导航左侧logo-->
+        <div id="top-nav-logo" class="col-md-3 top-nav-sub-css">
+            <a href="noticeList.jsp"><img src="res/img/wjc.jpg" width="340px" height="80px;"></a>
+        </div>
+        <!--顶部导航右侧-->
+        <div id="top-nav-content" class="col-md-9 top-nav-sub-css">
+
+            <!--顶部导航右侧上层-->
+            <div id="top-nav-content-status" class="row top-nav-status-css">
+
+                <div id="platform-title" class="col-md-4"><span id="top-width-warning" style="color: #ff0000;font-weight: bold;display: none;">请保证显示器分辨率宽度在1000px及以上以获取最佳显示效果</span></div>
+                <div id="user-status" class="col-md-4" style="font-weight: bold;text-align: right;">欢迎，</div>
+                <div id="user-type" class="col-md-3" style="font-weight: bold;text-align: center;">控制台</div>
+                <div id="user-logout" class="col-md-1" style="font-weight: bold;text-align: center;"><a href="../login/logout">登出</a></div>
+            </div>
+            <hr />
+            <!--顶部导航右侧下层-->
+            <div id="top-nav-content-func" class="row top-nav-func-css">
+
+                <div id="func-notice" class="col-md-1 top-nav-func-title-css">
+                    <label><a href="noticeList.jsp">通知</a></label>
+                </div>
+
+                <div id="func-student" class="col-md-1 top-nav-func-title-css">
+                    <label><a href="studentList.jsp">学生</a></label>
+                </div>
+
+                <div id="func-course" class="col-md-1 top-nav-func-title-css">
+                    <label><a href="courseList.jsp">课程</a></label>
+                </div>
+
+                <div id="func-checkin" class="col-md-1 top-nav-func-title-css">
+                    <label><a href="javascript:alert('暂未开放，请先使用作业功能凑活一下~')">签到</a></label>
+                </div>
+
+                <div id="func-task" class="col-md-1 top-nav-func-title-css">
+                    <label><a href="taskList.jsp">作业</a></label>
+                </div>
+
+                <div id="func-user" class="col-md-1 top-nav-func-title-css">
+                    <label><a href="userInfo.jsp">我的</a></label>
+                </div>
+            </div>
+        </div>
+
+    </div>
